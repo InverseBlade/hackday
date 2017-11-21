@@ -1,0 +1,53 @@
+{include file="index/header" title="排行榜"/}
+
+<body style="font-size:16px;text-align: center;background-color: #f8f8f8;">
+<nav style="background-color: #f0f0f0;" class="navbar navbar-default" role="navigation">
+    <div style="font-weight: inherit;" class="container-fluid">
+        <div class="navbar-header">
+            <a style="margin-left: 400px;" class="navbar-brand" href="/index">视频网站</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="/rank/comics">动画</a></li>
+                <li><a href="/rank/music">音乐</a></li>
+                <li><a href="/rank/dance" >舞蹈</a></li>
+                <li><a href="/rank/game">游戏</a></li>
+                <li><a href="/rank/tech">科技</a></li>
+                <li><a href="/rank/demon">鬼畜</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="text-align:center;margin: 0 auto;">
+    {assign name="i" value="1"}
+    {volist name="data" id="row"}
+
+    <script>function showImg(url) {
+        var frameid = 'frameimg' + Math.random();
+        window.img = '<a href="{$row.web_src}" style="float: left;" target="_blank"><img id="img" style="float: left;width:250px;margin-left:-8px;margin-top:-8px;" src=\'' + url + '?' + Math.random() + '\' /></a><script>window.onload = function() { parent.document.getElementById(\'' + frameid + '\').height = document.getElementById(\'img\').height+\'px\'; }<' + '/script>';
+        document.write('<iframe id="' + frameid + '" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="100%"></iframe>');
+    }
+    </script>
+
+    <div style="width:800px;text-align:left;margin: 0 auto;">
+        <h3>No.{++$i/2} {$row.title}</h3>
+        <table>
+            <tr>
+                <td>
+                    <a href="{$row.web_src}" style="float: left;"><script type='text/javascript'>showImg('{$row.image_src}');</script></a>
+                </td>
+                <td style="padding-left:10px;width: 500px;" valign="top">
+                    {$row.introduct}
+                </td>
+            </tr>
+        </table>
+        <!--<div style="float:left;padding-left: 1px;display:inline-block;width: 600px;"></div>-->
+        <span style="color: #e3e3e3;">
+            _________________________________________________________________________________________________________________
+        </span>
+    </div>
+    {/volist}
+</div>
+</body>
+
